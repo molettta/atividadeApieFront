@@ -1,191 +1,320 @@
 <!DOCTYPE html>
+<!-- ============================================
+     PÁGINA HTML - FRONTEND DA APLICAÇÃO
+     ============================================
+     Este arquivo cria a interface visual que o usuário vê no navegador
+     É como a "cara" da aplicação, o que aparece na tela
+-->
+
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Frontend - Exercício</title>
+    <!-- ============================================
+         CONFIGURAÇÕES DA PÁGINA (Meta Tags)
+         ============================================ -->
+    <meta charset="UTF-8">  <!-- Define que vamos usar caracteres especiais (ç, ã, etc) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Responsivo para celular -->
+    <title>API Frontend - Exercício</title>  <!-- Título que aparece na aba do navegador -->
+    
+    <!-- ============================================
+         ESTILOS CSS (Aparência Visual)
+         ============================================
+         CSS = Cascading Style Sheets (Folhas de Estilo)
+         Define cores, tamanhos, posições, etc.
+    -->
     <style>
+        /* Reset básico: remove estilos padrão do navegador */
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            margin: 0;           /* Remove espaçamento externo */
+            padding: 0;          /* Remove espaçamento interno */
+            box-sizing: border-box;  /* Facilita cálculos de tamanho */
         }
 
+        /* Estilo do corpo da página (body) */
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            font-family: Arial, sans-serif;  /* Fonte padrão */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);  /* Fundo com gradiente roxo */
+            min-height: 100vh;   /* Altura mínima = 100% da tela (viewport height) */
+            padding: 20px;       /* Espaçamento interno de 20 pixels */
         }
 
+        /* Container principal: caixa branca no centro */
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 800px;    /* Largura máxima de 800 pixels */
+            margin: 0 auto;      /* Centraliza horizontalmente (auto nas laterais) */
+            background: white;   /* Fundo branco */
+            border-radius: 10px; /* Bordas arredondadas */
+            padding: 30px;       /* Espaçamento interno */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);  /* Sombra para dar profundidade */
         }
 
+        /* Título principal */
         h1 {
-            color: #333;
-            margin-bottom: 30px;
-            text-align: center;
+            color: #333;         /* Cor do texto: cinza escuro */
+            margin-bottom: 30px; /* Espaço abaixo do título */
+            text-align: center;  /* Texto centralizado */
         }
 
+        /* Seções: cada "bloco" de funcionalidade */
         .section {
-            margin-bottom: 40px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 8px;
+            margin-bottom: 40px; /* Espaço entre seções */
+            padding: 20px;       /* Espaçamento interno */
+            background: #f8f9fa; /* Fundo cinza claro */
+            border-radius: 8px;  /* Bordas arredondadas */
         }
 
+        /* Títulos das seções */
         .section h2 {
-            color: #667eea;
-            margin-bottom: 15px;
+            color: #667eea;      /* Cor roxa */
+            margin-bottom: 15px; /* Espaço abaixo */
         }
 
+        /* Botões */
         button {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-right: 10px;
-            margin-bottom: 10px;
+            background: #667eea; /* Cor de fundo roxa */
+            color: white;        /* Cor do texto: branco */
+            border: none;       /* Remove borda padrão */
+            padding: 12px 24px; /* Espaçamento interno (vertical horizontal) */
+            border-radius: 5px; /* Bordas arredondadas */
+            cursor: pointer;    /* Cursor vira "mãozinha" ao passar o mouse */
+            font-size: 16px;    /* Tamanho da fonte */
+            margin-right: 10px; /* Espaço à direita */
+            margin-bottom: 10px; /* Espaço abaixo */
         }
 
+        /* Quando passar o mouse sobre o botão */
         button:hover {
-            background: #5568d3;
+            background: #5568d3; /* Cor mais escura */
         }
 
+        /* Campos de input (entrada de dados) */
         input {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin: 5px;
-            font-size: 14px;
+            padding: 10px;      /* Espaçamento interno */
+            border: 1px solid #ddd;  /* Borda cinza clara */
+            border-radius: 5px; /* Bordas arredondadas */
+            margin: 5px;        /* Espaçamento externo */
+            font-size: 14px;    /* Tamanho da fonte */
         }
 
+        /* Áreas de resultado */
         #resultado-frutas, #resultado-soma {
-            margin-top: 15px;
-            padding: 15px;
-            background: white;
-            border-radius: 5px;
-            border-left: 4px solid #667eea;
+            margin-top: 15px;   /* Espaço acima */
+            padding: 15px;      /* Espaçamento interno */
+            background: white;  /* Fundo branco */
+            border-radius: 5px; /* Bordas arredondadas */
+            border-left: 4px solid #667eea;  /* Borda esquerda roxa (destaque) */
         }
 
+        /* Cada item de fruta na lista */
         .fruta-item {
-            padding: 10px;
-            margin: 5px 0;
-            background: #e9ecef;
-            border-radius: 5px;
+            padding: 10px;      /* Espaçamento interno */
+            margin: 5px 0;      /* Espaço acima e abaixo */
+            background: #e9ecef; /* Fundo cinza bem claro */
+            border-radius: 5px; /* Bordas arredondadas */
         }
 
+        /* Mensagem de carregamento */
         .loading {
-            color: #667eea;
-            font-style: italic;
+            color: #667eea;     /* Cor roxa */
+            font-style: italic; /* Texto em itálico */
         }
 
+        /* Mensagem de erro */
         .erro {
-            color: #dc3545;
-            background: #f8d7da;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
+            color: #dc3545;     /* Cor vermelha */
+            background: #f8d7da; /* Fundo vermelho claro */
+            padding: 10px;      /* Espaçamento interno */
+            border-radius: 5px; /* Bordas arredondadas */
+            margin-top: 10px;   /* Espaço acima */
         }
     </style>
 </head>
 <body>
+    <!-- ============================================
+         CONTEÚDO VISUAL DA PÁGINA (HTML)
+         ============================================ -->
+    
+    <!-- Container principal: envolve todo o conteúdo -->
     <div class="container">
+        <!-- Título principal da página -->
         <h1>🍎 API Frontend - Exercício</h1>
 
-        <!-- Seção: Carregar Frutas -->
+        <!-- ============================================
+             SEÇÃO 1: Carregar Frutas
+             ============================================ -->
         <div class="section">
             <h2>1. Carregar Frutas</h2>
+            
+            <!-- Botão que chama a função carregarFrutas() quando clicado -->
+            <!-- onclick = evento que acontece quando o usuário clica -->
             <button onclick="carregarFrutas()">Carregar Frutas</button>
+            
+            <!-- Div onde o resultado será exibido -->
+            <!-- id = identificador único para encontrar este elemento no JavaScript -->
             <div id="resultado-frutas"></div>
         </div>
 
-        <!-- Seção: Soma -->
+        <!-- ============================================
+             SEÇÃO 2: Soma de Números
+             ============================================ -->
         <div class="section">
             <h2>2. Soma de Números</h2>
+            
+            <!-- Input para o primeiro número -->
+            <!-- type="number" = só aceita números -->
+            <!-- id = identificador para pegar o valor no JavaScript -->
+            <!-- placeholder = texto que aparece quando está vazio -->
+            <!-- value = valor inicial -->
             <input type="number" id="numero-a" placeholder="Número A" value="5">
             <input type="number" id="numero-b" placeholder="Número B" value="3">
+            
+            <!-- Botão que chama a função calcularSoma() quando clicado -->
             <button onclick="calcularSoma()">Calcular Soma</button>
+            
+            <!-- Div onde o resultado da soma será exibido -->
             <div id="resultado-soma"></div>
         </div>
     </div>
 
+    <!-- ============================================
+         CÓDIGO JAVASCRIPT (Lógica e Interatividade)
+         ============================================
+         JavaScript = linguagem de programação que torna a página "viva"
+         É o que faz as coisas acontecerem quando você clica em botões
+    -->
     <script>
+        // ============================================
+        // CONFIGURAÇÃO DA URL DA API
+        // ============================================
+        // A API (backend) está rodando em outro lugar
+        // Precisamos saber o "endereço" para fazer requisições
+        
         // Detecta se está rodando em Docker ou localmente
         const API_URL = window.location.hostname === 'localhost' 
             ? 'http://localhost:3000' 
             : 'http://backend:3000';
         
-        // Para desenvolvimento local, use localhost
-        // Para Docker, o backend será acessado via nome do serviço
+        // URL pública: sempre usa localhost porque o navegador do usuário
+        // precisa acessar pela porta exposta do Docker
         const API_URL_PUBLIC = 'http://localhost:3000';
 
-        // Função para carregar frutas
+        // ============================================
+        // FUNÇÃO 1: Carregar Frutas
+        // ============================================
+        // async = função assíncrona (pode demorar para executar)
+        // await = espera a resposta antes de continuar
+        
         async function carregarFrutas() {
+            // Passo 1: Encontrar o elemento HTML onde vamos mostrar o resultado
+            // document.getElementById() = procura um elemento pelo ID
             const resultadoDiv = document.getElementById('resultado-frutas');
+            
+            // Passo 2: Mostrar mensagem de "carregando" enquanto busca os dados
+            // innerHTML = conteúdo HTML dentro do elemento
             resultadoDiv.innerHTML = '<p class="loading">Carregando frutas...</p>';
 
+            // Passo 3: Tentar fazer a requisição para a API
+            // try = tenta executar (se der erro, vai para o catch)
             try {
+                // fetch() = função que faz requisição HTTP (busca dados na internet)
+                // É como fazer um pedido ao garçom do restaurante
+                // await = espera a resposta chegar antes de continuar
                 const response = await fetch(`${API_URL_PUBLIC}/pega-frutas`);
+                
+                // response.json() = converte a resposta em formato JSON para objeto JavaScript
+                // await = espera a conversão terminar
                 const data = await response.json();
+                // Agora 'data' contém: { sucesso: true, frutas: [...] }
 
+                // Passo 4: Verificar se deu certo
                 if (data.sucesso) {
+                    // Se deu certo, vamos criar o HTML para mostrar as frutas
                     let html = '<h3>Frutas carregadas:</h3>';
+                    
+                    // forEach = percorre cada item do array
+                    // É como olhar cada fruta na lista, uma por uma
                     data.frutas.forEach(fruta => {
+                        // Para cada fruta, adiciona um pedaço de HTML
+                        // Template string (backticks ``) permite usar variáveis dentro do texto
                         html += `
                             <div class="fruta-item">
                                 <strong>${fruta.nome}</strong> - Cor: ${fruta.cor}
                             </div>
                         `;
+                        // ${fruta.nome} = pega o valor da propriedade 'nome' do objeto fruta
                     });
+                    
+                    // Coloca o HTML criado dentro da div de resultado
                     resultadoDiv.innerHTML = html;
                 } else {
+                    // Se não deu certo, mostra mensagem de erro
                     resultadoDiv.innerHTML = '<p class="erro">Erro ao carregar frutas</p>';
                 }
             } catch (error) {
+                // catch = se der algum erro (ex: servidor não está rodando)
+                // Mostra mensagem de erro com detalhes
                 resultadoDiv.innerHTML = `<p class="erro">Erro: ${error.message}. Verifique se o backend está rodando!</p>`;
             }
         }
 
-        // Função para calcular soma
+        // ============================================
+        // FUNÇÃO 2: Calcular Soma
+        // ============================================
         async function calcularSoma() {
+            // Passo 1: Encontrar os elementos HTML
             const resultadoDiv = document.getElementById('resultado-soma');
+            
+            // Passo 2: Pegar os valores dos inputs
+            // .value = pega o texto que o usuário digitou
             const a = document.getElementById('numero-a').value;
             const b = document.getElementById('numero-b').value;
 
+            // Passo 3: Validar se os campos estão preenchidos
+            // !a = se 'a' estiver vazio (falsy)
             if (!a || !b) {
+                // Se algum campo estiver vazio, mostra erro e para aqui (return)
                 resultadoDiv.innerHTML = '<p class="erro">Por favor, preencha ambos os números!</p>';
-                return;
+                return;  // Para a execução da função aqui
             }
 
+            // Passo 4: Mostrar mensagem de "calculando"
             resultadoDiv.innerHTML = '<p class="loading">Calculando...</p>';
 
+            // Passo 5: Fazer requisição para a API
             try {
+                // Monta a URL com os parâmetros: /soma?a=5&b=3
+                // Template string permite inserir variáveis: ${a} e ${b}
                 const response = await fetch(`${API_URL_PUBLIC}/soma?a=${a}&b=${b}`);
+                
+                // Converte resposta para objeto JavaScript
                 const data = await response.json();
 
+                // Passo 6: Verificar se deu certo
                 if (data.sucesso) {
+                    // Mostra o resultado formatado
                     resultadoDiv.innerHTML = `
                         <h3>Resultado:</h3>
                         <p><strong>${data.a} + ${data.b} = ${data.resultado}</strong></p>
                     `;
                 } else {
+                    // Se a API retornou erro, mostra a mensagem de erro
                     resultadoDiv.innerHTML = `<p class="erro">${data.erro}</p>`;
                 }
             } catch (error) {
+                // Se der erro na requisição (ex: servidor offline)
                 resultadoDiv.innerHTML = `<p class="erro">Erro: ${error.message}. Verifique se o backend está rodando!</p>`;
             }
         }
+        
+        // ============================================
+        // RESUMO DO FLUXO:
+        // ============================================
+        // 1. Usuário clica no botão
+        // 2. Função JavaScript é executada
+        // 3. Função faz requisição HTTP para o backend (fetch)
+        // 4. Backend processa e retorna dados (JSON)
+        // 5. Frontend recebe os dados
+        // 6. Frontend atualiza a página com os dados (innerHTML)
+        // 7. Usuário vê o resultado na tela
     </script>
 </body>
 </html>
-
