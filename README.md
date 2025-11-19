@@ -68,32 +68,13 @@ O projeto utiliza **Docker Compose** para orquestrar dois containers:
 
 ## 🚀 Como Começar
 
-### Pré-requisitos
+**📖 Para instruções detalhadas de instalação e configuração, consulte o arquivo [`inicia.md`](./inicia.md)**
 
-- [Docker Desktop](https://www.docker.com/get-started) instalado e rodando
-- Git instalado
-- Editor de código (VS Code recomendado)
-
-### Passo a Passo Rápido
-
-1. **Clone o repositório:**
-   ```bash
-   git clone https://github.com/molettta/atividadeApieFront.git
-   cd atividadeApieFront
-   ```
-
-2. **Inicie os containers:**
-   ```bash
-   docker-compose up --build
-   ```
-
-3. **Acesse a aplicação:**
-   - Frontend: http://localhost:8080
-   - Backend: http://localhost:3000
-
-4. **Comece pelos exercícios!**
-   - Leia o arquivo `inicia.md` para instruções detalhadas
-   - Siga os exercícios na ordem (1, 2, 3, 4, 5)
+**Resumo rápido:**
+1. Clone o repositório
+2. Execute `docker-compose up --build`
+3. Acesse http://localhost:8080 (frontend) e http://localhost:3000 (backend)
+4. Siga os exercícios na ordem (1, 2, 3, 4, 5)
 
 ---
 
@@ -247,24 +228,7 @@ atividadeApieFront/
 
 ## 🔧 Comandos Úteis
 
-### Docker Compose
-
-```bash
-# Iniciar os containers
-docker-compose up --build
-
-# Iniciar em background
-docker-compose up -d
-
-# Parar os containers
-docker-compose down
-
-# Ver logs
-docker-compose logs -f
-
-# Reconstruir containers
-docker-compose up --build --force-recreate
-```
+**📖 Para comandos Docker detalhados e troubleshooting, consulte [`inicia.md`](./inicia.md)**
 
 ### Git (Para Alunos)
 
@@ -335,24 +299,12 @@ Os exercícios foram projetados para:
 
 ## 🐛 Solução de Problemas
 
-### Docker não inicia
-- Verifique se Docker Desktop está rodando
-- Reinicie o Docker Desktop
-- Veja mais em `inicia.md`
+**📖 Para troubleshooting completo e soluções detalhadas, consulte a seção "Solução de Problemas" em [`inicia.md`](./inicia.md)**
 
-### Backend não atualiza
-- Verifique se nodemon está rodando
-- Veja os logs: `docker-compose logs backend`
-- Verifique se salvou o arquivo
-
-### Frontend não atualiza
-- Recarregue a página no navegador (`F5`)
-- Verifique se o arquivo foi salvo
-- Limpe o cache do navegador (`Ctrl + Shift + R`)
-
-### Erros de CORS
-- Verifique se `app.use(cors())` está no backend
-- Verifique se o backend está rodando na porta 3000
+**Problemas comuns:**
+- Docker não inicia → Verifique se Docker Desktop está rodando
+- Backend não atualiza → Nodemon deve estar rodando (veja logs)
+- Frontend não atualiza → Recarregue a página (`F5`)
 
 ---
 
@@ -397,10 +349,11 @@ Projeto desenvolvido para facilitar o aprendizado de desenvolvimento web, APIs e
 ## 📞 Suporte
 
 Se tiver dúvidas:
-1. Consulte o arquivo `inicia.md` para instruções detalhadas
-2. Revise os exercícios (têm soluções de referência)
-3. Verifique a seção "Solução de Problemas" acima
-4. Peça ajuda ao professor
+1. **Instalação e configuração:** Consulte [`inicia.md`](./inicia.md)
+2. **Exercícios:** Revise os arquivos `exercicio*.md` (têm soluções de referência)
+3. **Problemas técnicos:** Veja a seção "Solução de Problemas" em [`inicia.md`](./inicia.md)
+4. **Git:** Veja a seção "Git (Para Alunos)" acima
+5. **Ainda com dúvidas:** Peça ajuda ao professor
 
 ---
 
