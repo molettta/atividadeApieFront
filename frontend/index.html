@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Frontend - Exercício</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background: #5568d3;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 5px;
+            font-size: 14px;
+        }
+
+        #resultado-frutas, #resultado-soma {
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }
+
+        .fruta-item {
+            padding: 10px;
+            margin: 5px 0;
+            background: #e9ecef;
+            border-radius: 5px;
+        }
+
+        .loading {
+            color: #667eea;
+            font-style: italic;
+        }
+
+        .erro {
+            color: #dc3545;
+            background: #f8d7da;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍎 API Frontend - Exercício</h1>
+
+        <!-- Seção: Carregar Frutas -->
+        <div class="section">
+            <h2>1. Carregar Frutas</h2>
+            <button onclick="carregarFrutas()">Carregar Frutas</button>
+            <div id="resultado-frutas"></div>
+        </div>
+
+        <!-- Seção: Soma -->
+        <div class="section">
+            <h2>2. Soma de Números</h2>
+            <input type="number" id="numero-a" placeholder="Número A" value="5">
+            <input type="number" id="numero-b" placeholder="Número B" value="3">
+            <button onclick="calcularSoma()">Calcular Soma</button>
+            <div id="resultado-soma"></div>
+        </div>
+    </div>
+
+    <script>
+        // Detecta se está rodando em Docker ou localmente
+        const API_URL = window.location.hostname === 'localhost' 
+            ? 'http://localhost:3000' 
+            : 'http://backend:3000';
+        
+        // Para desenvolvimento local, use localhost
+        // Para Docker, o backend será acessado via nome do serviço
+        const API_URL_PUBLIC = 'http://localhost:3000';
+
+        // Função para carregar frutas
+        async function carregarFrutas() {
+            const resultadoDiv = document.getElementById('resultado-frutas');
+            resultadoDiv.innerHTML = '<p class="loading">Carregando frutas...</p>';
+
+            try {
+                const response = await fetch(`${API_URL_PUBLIC}/pega-frutas`);
+                const data = await response.json();
+
+                if (data.sucesso) {
+                    let html = '<h3>Frutas carregadas:</h3>';
+                    data.frutas.forEach(fruta => {
+                        html += `
+                            <div class="fruta-item">
+                                <strong>${fruta.nome}</strong> - Cor: ${fruta.cor}
+                            </div>
+                        `;
+                    });
+                    resultadoDiv.innerHTML = html;
+                } else {
+                    resultadoDiv.innerHTML = '<p class="erro">Erro ao carregar frutas</p>';
+                }
+            } catch (error) {
+                resultadoDiv.innerHTML = `<p class="erro">Erro: ${error.message}. Verifique se o backend está rodando!</p>`;
+            }
+        }
+
+        // Função para calcular soma
+        async function calcularSoma() {
+            const resultadoDiv = document.getElementById('resultado-soma');
+            const a = document.getElementById('numero-a').value;
+            const b = document.getElementById('numero-b').value;
+
+            if (!a || !b) {
+                resultadoDiv.innerHTML = '<p class="erro">Por favor, preencha ambos os números!</p>';
+                return;
+            }
+
+            resultadoDiv.innerHTML = '<p class="loading">Calculando...</p>';
+
+            try {
+                const response = await fetch(`${API_URL_PUBLIC}/soma?a=${a}&b=${b}`);
+                const data = await response.json();
+
+                if (data.sucesso) {
+                    resultadoDiv.innerHTML = `
+                        <h3>Resultado:</h3>
+                        <p><strong>${data.a} + ${data.b} = ${data.resultado}</strong></p>
+                    `;
+                } else {
+                    resultadoDiv.innerHTML = `<p class="erro">${data.erro}</p>`;
+                }
+            } catch (error) {
+                resultadoDiv.innerHTML = `<p class="erro">Erro: ${error.message}. Verifique se o backend está rodando!</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
+
