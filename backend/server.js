@@ -46,6 +46,7 @@ const frutas = [
   { id: 3, nome: 'Laranja', cor: 'Laranja' },
   { id: 4, nome: 'Uva', cor: 'Roxa' },
   { id: 5, nome: 'Morango', cor: 'Vermelha' },
+  { id: 6, nome: 'Limão', cor: 'Veeeeeeeeeeeeeerde' },
 ];
 
 // ============================================
@@ -69,7 +70,8 @@ app.get('/pega-frutas', (req, res) => {
   // JSON é como um "dicionário" com chave: valor
   res.json({
     sucesso: true,           // Indica que deu tudo certo
-    frutas: frutas           // Envia a lista de frutas
+    frutas: frutas,
+    outraCoisa: 'teste'           // Envia a lista de frutas
   });
   
   // O que acontece:
@@ -116,14 +118,14 @@ app.get('/soma', (req, res) => {
   // Fazer a soma
   const resultado = a + b;
 
-  // Retornar o resultado em formato JSON
-  res.json({
-    sucesso: true,
-    a: a,                    // Primeiro número
-    b: b,                    // Segundo número
-    resultado: resultado     // Resultado da soma
+    // Retornar o resultado em formato JSON
+    res.json({
+      sucesso: true,
+      a: a,                    // Primeiro número
+      b: b,                    // Segundo número
+      resultado: resultado     // Resultado da soma
+    });
   });
-});
 
 // ------------------------------------------------------------
 // ROTA 3: GET / (raiz)
@@ -139,6 +141,13 @@ app.get('/', (req, res) => {
       'GET /pega-frutas - Retorna lista de frutas',
       'GET /soma?a=X&b=Y - Soma dois números'
     ]
+  });
+});
+app.get('/asd', (req, res) => {
+  // Retorna informações sobre a API
+  res.json({
+    mensagem: 'EndPoint funcionando novo!',
+   
   });
 });
 
